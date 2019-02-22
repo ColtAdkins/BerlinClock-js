@@ -13,11 +13,14 @@ describe("BerlinClock", function(){
 
 	describe("tick", function(){
 		beforeEach(function(){
+			//setup of spies
 			spyOn(BerlinClock, "updateSeconds");
 			spyOn(BerlinClock, "updateHours");
 			spyOn(BerlinClock, "updateMinutes");
 			spyOn(BerlinClock, "updateClock");
 			spyOn(BerlinClock, "reset");
+
+			//invokaction of the worker function
 			BerlinClock.tick();
 		});
 
@@ -26,19 +29,19 @@ describe("BerlinClock", function(){
 		});
 
 		it("updates the hours", function(){
-
+			expect(BerlinClock.updateHours).toHaveBeenCalled();
 		});
 
 		it("updates the minutes", function(){
-
+			expect(BerlinClock.updateMinutes).toHaveBeenCalled();
 		});
 
 		it("updates the clock", function(){
-
+			expect(BerlinClock.updateClock).toHaveBeenCalled();
 		});
 
 		it("resets the clock, clearing out all colors", function(){
-
+			expect(BerlinClock.reset).toHaveBeenCalled();
 		});
 	});
 
@@ -55,7 +58,7 @@ describe("BerlinClock", function(){
 	describe("updateSeconds", function(){
 		it("marks the seconds as yellow when the second is odd", function(){
 			BerlinClock.updateSeconds(1);
-			var seconds = document.getElementById("seconds").children[0];
+			var seconds = $(".ticker:nth-child(0)","#seconds");
 			expect(seconds.className).toBe(yellow);
 		});
 
@@ -66,78 +69,117 @@ describe("BerlinClock", function(){
 	describe("updateHours", function(){
 		describe("the hour is 0", function(){
 			it("has hoursOfFive as [O O O O]", function(){
+				BerlinClock.updateHours(0);
+				var hoursOfFive = document.getElementById("hoursOfFive").children[0];
+				expect(hoursOfFive.className).toBe(none);
 			});
 			it("has hoursOfOne as [O O O O]", function(){
 			});
 		});
 		describe("the hour is 1", function(){
 			it("has hoursOfFive as [O O O O]", function(){
+				BerlinClock.updateHours(1);
+				var hoursOfFive = document.getElementById("hoursOfFive").children[0];
+				expect(hoursOfFive.className).toBe(none);
 			});
 			it("has hoursOfOne as [R O O O]", function(){
+				BerlinClock.updateHours(1)
+				var hoursOfOne = document.getElementById("hoursOfOne").children[0]
+				expect(hoursOfOne.className).toBe(none)
 			});
 		});
 		describe("the hour is 2", function(){
 			it("has hoursOfFive as [O O O O]", function(){
+				BerlinClock.updateHours(2);
+				var hoursOfFive = document.getElementById("hoursOfFive").children[0];
+				expect(hoursOfFive.className).toBe(none);
 			});
 			it("has hoursOfOne as [R R O O]", function(){
 			});
 		});
 		describe("the hour is 3", function(){
-			it("has hoursOfFive as [O O O O]", function(){
+			it("has hoursOfFive as [O O O O]", function()
+			{
+				BerlinClock.updateHours(3);
+				var hoursOfFive = document.getElementById("hoursOfFive").children[0];
+				expect(hoursOfFive.className).toBe(none);
 			});
 			it("has hoursOfOne as [R R R O]", function(){
 			});
 		});
 		describe("the hour is 4", function(){
 			it("has hoursOfFive as [O O O O]", function(){
+				BerlinClock.updateHours(4);
+				var hoursOfFive = document.getElementById("hoursOfFive").children[0];
+				expect(hoursOfFive.className).toBe(none);
 			});
 			it("has hoursOfOne as [R R R R]", function(){
 			});
 		});
 		describe("the hour is 5", function(){
 			it("has hoursOfFive as [R O O O]", function(){
+				BerlinClock.updateHours(5);
+				var hoursOfFive = document.getElementById("hoursOfFive").children[0];
+				expect(hoursOfFive.className).toBe(red);
 			});
 			it("has hoursOfOne as [O O O O]", function(){
 			});
 		});
 		describe("the hour is 6", function(){
 			it("has hoursOfFive as [R O O O]", function(){
+				BerlinClock.updateHours(6);
+				var hoursOfFive = document.getElementById("hoursOfFive").children[1];
+				expect(hoursOfFive.className).toBe(none);
 			});
 			it("has hoursOfOne as [R O O O]", function(){
 			});
 		});
 		describe("the hour is 7", function(){
 			it("has hoursOfFive as [R O O O]", function(){
+				BerlinClock.updateHours(7);
+				var hoursOfFive = document.getElementById("hoursOfFive").children[1];
+				expect(hoursOfFive.className).toBe(none);
 			});
 			it("has hoursOfOne as [R R O O]", function(){
 			});
 		});
 		describe("the hour is 8", function(){
 			it("has hoursOfFive as [R O O O]", function(){
+				BerlinClock.updateHours(8);
+				var hoursOfFive = document.getElementById("hoursOfFive").children[1];
+				expect(hoursOfFive.className).toBe(none);
 			});
 			it("has hoursOfOne as [R R R O]", function(){
 			});
 		});
 		describe("the hour is 9", function(){
 			it("has hoursOfFive as [R O O O]", function(){
+				BerlinClock.updateHours(9);
+				var hoursOfFive = document.getElementById("hoursOfFive").children[1];
+				expect(hoursOfFive.className).toBe(none);
 			});
 			it("has hoursOfOne as [R R R R]", function(){
 			});
 		});
 		describe("the hour is 10", function(){
 			it("has hoursOfFive as [R R O O]", function(){
+				BerlinClock.updateHours(10);
+				var hoursOfFive = document.getElementById("hoursOfFive").children[1];
+				expect(hoursOfFive.className).toBe(red);
 			});
 			it("has hoursOfOne as [O O O O]", function(){
 			});
 		});
 		describe("the hour is 11", function(){
 			it("has hoursOfFive as [R R O O]", function(){
+
 			});
 			it("has hoursOfOne as [R O O O]", function(){
 			});
 		});
 		describe("the hour is 12", function(){
 			it("has hoursOfFive as [R R O O]", function(){
+
 			});
 			it("has hoursOfOne as [R R O O]", function(){
 			});
